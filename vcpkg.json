@@ -1,0 +1,15 @@
+{
+  "name": "example",
+  "version": "1.0",
+  "port-version": 0,
+  "dependencies": [
+    {
+      "name": "skia",
+      "platform": "osx",
+      "features": ["gl","metal"],
+      "version>=": "134#2"
+    },
+      "sdl2",
+      "glfw3"
+  ]
+}
