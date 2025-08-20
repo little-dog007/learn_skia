@@ -16,8 +16,11 @@
 #include "tools/window/mac/GaneshANGLEWindowContext_mac.h"
 #endif
 
-
+#if defined(USE_METAL)
 #include "GaneshMetalWindowContext_mac.h"
+#else
+#include "GaneshGLWindowContext_mac.h"
+#endif
 
 #if defined(SK_GRAPHITE) && defined(SK_METAL)
 #include "tools/window/mac/GraphiteNativeMetalWindowContext_mac.h"
@@ -139,7 +142,14 @@ bool Window_mac::attach(BackendType attachType) {
 
     skwindow::MacWindowInfo info;
     info.fMainView = [fWindow contentView];
-    fWindowContext = MakeGaneshMetalForMac(info, fRequestedDisplayParams->clone());
+
+#if defined(USE_METAL)
+        fWindowContext = MakeGaneshMetalForMac(info, fRequestedDisplayParams->clone());
+ #else
+        fWindowContext = MakeGaneshGLForMac(info, fRequestedDisplayParams->clone());
+#endif
+
+
 
     this->onBackendCreated();
 

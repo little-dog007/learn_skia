@@ -26,8 +26,26 @@ add_executable(metal
         util/Windows.cpp
         util/Application.h
         util/editor_application.cpp)
+target_compile_definitions(metal PRIVATE USE_METAL)
 target_include_directories(metal PRIVATE util)
 
 target_link_libraries(metal PRIVATE unofficial::skia::skia SDL2::SDL2)
+
+
+add_executable(gl
+        metal/main_mac.mm
+        metal/main_mac.mm
+        metal/Window_mac.mm
+        util/WindowContext.cpp
+        util/Windows.cpp
+        util/Application.h
+        util/editor_application.cpp
+
+        gl/GaneshGLWindowContext_mac.mm
+        gl/GLWindowContext.cpp
+)
+target_include_directories(gl PRIVATE util gl)
+
+target_link_libraries(gl PRIVATE unofficial::skia::skia SDL2::SDL2)
 
 
